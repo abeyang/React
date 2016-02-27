@@ -1,0 +1,57 @@
+<!-- $title: Testing -->
+
+<!-- $dir: ../../ -->
+<!-- @include ../../includes/head -->
+
+<!-- Load all other resources here: -->
+<script type="text/babel">
+
+var FilterableProductTable = React.createClass({
+  getInitialState: function() {
+    return {
+      filterText: '',
+      inStockOnly: false
+    };
+  },
+
+  handleUserInput: function(filterText, inStockOnly) {
+    this.setState({
+      filterText: filterText,
+      inStockOnly: inStockOnly
+    });
+  },
+	
+  render: function() {
+    return (
+      <div>
+        <SearchBar
+          filterText={this.state.filterText}
+          inStockOnly={this.state.inStockOnly}
+          onUserInput={this.handleUserInput}
+        />
+        <ProductTable
+          products={this.props.products}
+          filterText={this.state.filterText}
+          inStockOnly={this.state.inStockOnly}
+        />
+      </div>
+    );
+  }
+});
+
+var COLLEGES = [
+  {name: 'Berkeley', state: 'ca', type: 'semester', grads: 10125, undergrads: {total: 25774, asians: 9300, latinos: 3320}, liveoncampus: {frosh: 95%, undergrads: 26%}, sat: 2124, gpa: 3.9}
+];
+ 
+ReactDOM.render(
+  <FilterableProductTable colleges={COLLEGES} />,
+  document.getElementById('container')
+);
+	  	
+</script>
+
+<div id="container">
+
+</div>
+	
+<!-- @include ../../includes/foot -->
