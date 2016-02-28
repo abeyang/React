@@ -2,6 +2,7 @@
 
 <!-- $dir: ../../ -->
 <!-- @include ../../includes/head -->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="styles.css">
 
 <!-- Load all other resources here: -->
@@ -12,50 +13,45 @@ var CollegeRow = React.createClass({
     var name = this.props.college.name;
     var grads = this.props.college.grads;
     var undergrads = this.props.college.undergrads.total;
+    var total = grads + undergrads;
+    var max = this.props.max;
     var sat = this.props.college.sat;
     var gpa = this.props.college.gpa;
+    var uStyle = { width: undergrads / max * 100 + '%' };
+    var gStyle = { width: grads / max * 100 + '%' };
+
     return (
-      <tr>
-        <td>{name}</td>
-        <td>{undergrads}</td>
-        <td>{grads}</td>
-        <td>{undergrads+grads}</td>
-        <td>{sat}</td>
-        <td>{gpa}</td>
-      </tr>
+      <div className="row">
+        <div className="bar">
+          <div className="b-undergrad" style={uStyle}></div>
+          <div className="b-grad" style={gStyle}></div>
+        </div>
+        <div className="name pad">{name}</div>
+        <div className="total pad text-right">{total}</div>
+      </div>
     );
   }
 });
 
 var CollegeTable = React.createClass({
   render: function() {
+    var c_bigpop = _.max(this.props.colleges, function(c) { return c.undergrads.total; });
+    var max = c_bigpop.grads + c_bigpop.undergrads.total;
+
     var rows = [];
     this.props.colleges.forEach(function(college) {
-      rows.push(<CollegeRow college={college} key={college.name} />);
+      rows.push(<CollegeRow college={college} key={college.name} max={max} />);
     });
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Undergrads</th>
-            <th>Grads</th>
-            <th>Total</th>
-            <th>SAT</th>
-            <th>GPA</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>
+      <div>{rows}</div>
     );
   }
 });
 
-
 var COLLEGES = [
-  {name: 'Berkeley', state: 'ca', type: 'semester', grads: 10125, undergrads: {total: 25774, asians: 9300, latinos: 3320}, liveoncampus: {frosh: 0.95, undergrads: 0.26}, sat: 2124, gpa: 3.9},
-  {name: 'Riverside', state: 'ca', type: 'quarter', grads: 2676, undergrads: {total: 18621, asians: 6713, latinos: 6678}, liveoncampus: {frosh: 0.74, undergrads: 0.31}, sat: 1720, gpa: 3.6},
-  {name: 'Seattle', state: 'wa', type: 'quarter', grads: 13635, undergrads: {total: 28933, asians: 7119, latinos: 1813}, liveoncampus: {frosh: 0.65, undergrads: 0.26}, sat: 1795, gpa: 3.75}
+  {name: 'UC Berkeley', city: 'Berkeley', region: 'CA', type: 'semester', grads: 10125, undergrads: {total: 25774, asians: 9300, latinos: 3320}, liveoncampus: {frosh: 0.95, undergrads: 0.26}, sat: 2124, gpa: 3.9},
+  {name: 'UC Riverside', city: 'Riverside', region: 'CA', type: 'quarter', grads: 2676, undergrads: {total: 18621, asians: 6713, latinos: 6678}, liveoncampus: {frosh: 0.74, undergrads: 0.31}, sat: 1720, gpa: 3.6},
+  {name: 'University of Washington',  city: 'Seattle', region: 'WA', type: 'quarter', grads: 13635, undergrads: {total: 28933, asians: 7119, latinos: 1813}, liveoncampus: {frosh: 0.65, undergrads: 0.26}, sat: 1795, gpa: 3.75}
 ];
  
 ReactDOM.render(
@@ -65,10 +61,12 @@ ReactDOM.render(
       
 </script>
 
-<h1>Colleges</h1>
+<main>
+  <h1>Colleges</h1>
 
-<div id="container">
+  <div id="container">
 
-</div>
+  </div>
+</main>
   
 <!-- @include ../../includes/foot -->

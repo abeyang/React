@@ -1,15 +1,61 @@
 @import "bourbon", "neat";
 
+$slate: #333;
+$slate-15: rgba($slate, 0.15);
+
+// TYPOGRAPHY
+// -------------------------------------------------------------
+
 html, body {
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	color: $slate;
 }
+
+.text-right { text-align: right; }
+
+// LAYOUT
+// -------------------------------------------------------------
 
 body {
 	padding: 80px;
 }
 
-#container {
+main {
 	@include outer-container();
+}
+
+.row {
+	position: relative;
+	border-bottom: 1px dashed $slate-15;
+	@include clearfix;
+
+	.bar {
+		position: absolute;
+		bottom: -1px;
+		width: 100%;
+
+		div {
+			height: 2px;
+			float: left;
+		}
+		
+		.b-undergrad { background: green; }
+		.b-grad { background: blue; }
+	}
+}
+
+.pad {
+	padding: 20px 0;
+}
+
+.name {
+	@include span-columns(10);
+}
+
+.total {
+	@include span-columns(2);
+	@include omega();
 }
 
 table {

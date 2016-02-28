@@ -5,19 +5,63 @@ html {
   box-sizing: inherit; }
 
 html, body {
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif; }
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  color: #333; }
+
+.text-right {
+  text-align: right; }
 
 body {
   padding: 80px; }
 
-#container {
+main {
   max-width: 68em;
   margin-left: auto;
   margin-right: auto; }
-  #container::after {
+  main::after {
     clear: both;
     content: "";
     display: table; }
+
+.row {
+  position: relative;
+  border-bottom: 1px dashed rgba(51, 51, 51, 0.15); }
+  .row::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .row .bar {
+    position: absolute;
+    bottom: -1px;
+    width: 100%; }
+    .row .bar div {
+      height: 2px;
+      float: left; }
+    .row .bar .b-undergrad {
+      background: green; }
+    .row .bar .b-grad {
+      background: blue; }
+
+.pad {
+  padding: 20px 0; }
+
+.name {
+  float: left;
+  display: block;
+  margin-right: 2.3576515979%;
+  width: 82.9403914003%; }
+  .name:last-child {
+    margin-right: 0; }
+
+.total {
+  float: left;
+  display: block;
+  margin-right: 2.3576515979%;
+  width: 14.7019570017%;
+  margin-right: 0; }
+  .total:last-child {
+    margin-right: 0; }
 
 table {
   border-collapse: collapse; }
