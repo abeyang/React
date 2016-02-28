@@ -1,0 +1,27 @@
+@import "bourbon", "neat";
+
+html, body {
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+body {
+	padding: 80px;
+}
+
+#container {
+	@include outer-container();
+}
+
+table {
+	border-collapse:collapse;
+}
+
+th {
+	padding: 10px;
+	text-align: left;
+}
+
+td {
+	border-top: 1px solid #eee;
+	padding: 10px;
+}
