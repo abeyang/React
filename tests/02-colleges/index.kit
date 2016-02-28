@@ -12,12 +12,16 @@ var CollegeRow = React.createClass({
     var name = this.props.college.name;
     var grads = this.props.college.grads;
     var undergrads = this.props.college.undergrads.total;
+    var sat = this.props.college.sat;
+    var gpa = this.props.college.gpa;
     return (
       <tr>
         <td>{name}</td>
         <td>{undergrads}</td>
         <td>{grads}</td>
         <td>{undergrads+grads}</td>
+        <td>{sat}</td>
+        <td>{gpa}</td>
       </tr>
     );
   }
@@ -37,6 +41,8 @@ var CollegeTable = React.createClass({
             <th>Undergrads</th>
             <th>Grads</th>
             <th>Total</th>
+            <th>SAT</th>
+            <th>GPA</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
