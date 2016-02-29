@@ -64,7 +64,7 @@ nav {
     .row .bar .b-grad {
       background: blue; }
 
-.pad, .pad td {
+.pad, .pad td, .pad th {
   padding: 20px 0; }
 
 .name {
@@ -89,9 +89,8 @@ table {
   width: 100%; }
 
 th {
-  padding: 10px;
   text-align: left;
-  border-bottom: 1px solid #ccc; }
+  border-bottom: 1px solid rgba(51, 51, 51, 0.05); }
 
 td {
   border-bottom: 1px solid rgba(51, 51, 51, 0.05);

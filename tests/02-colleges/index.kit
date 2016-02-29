@@ -48,7 +48,7 @@ var PopTable = React.createClass({
   }
 });
 
-// List View
+// List View (Default)
 
 var ListRow = React.createClass({
   render: function() {
@@ -60,6 +60,7 @@ var ListRow = React.createClass({
     var gpa = this.props.college.gpa;
 
     return (
+
       <tr className="pad">
         <td>{name}</td>
         <td>{undergrads}</td>
@@ -79,7 +80,18 @@ var ListTable = React.createClass({
     });
     return (
       <table>
-        {rows}
+        <thead>
+          <tr className="pad">
+            <th>College</th>
+            <th>Undergrads</th>
+            <th>Grads</th>
+            <th>SAT</th>
+            <th>GPA</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows}
+        </tbody>
       </table>
     );
   }
@@ -89,30 +101,34 @@ var ListTable = React.createClass({
 
 var UI = React.createClass({
   getInitialState: function() {
-    return this.viewPop();
-  },
-
-  viewList: function() {
+    // TODO: seems redundant; should just go directly to viewList
     return {
       active: 'list',
       view: <ListTable colleges={COLLEGES} />
     };
   },
 
-  viewPop: function() {
-    return {
+  viewList: function(event) {
+    this.setState({
+      active: 'list',
+      view: <ListTable colleges={COLLEGES} />
+    });
+  },
+
+  viewPop: function(event) {
+    this.setState({
       active: 'pop',
       view: <PopTable colleges={COLLEGES} />
-    };
+    });
   },
 
   render: function() {
     return (
       <div>
         <nav>
-          <div className={ this.state.active == 'list' ? 'active' : ''} onclick={ this.viewList }>List</div>
-          <div className={ this.state.active == 'pop' ? 'active' : ''} onclick={ this.viewPop }>Population</div>
-          <div className={ this.state.active == 'campus' ? 'active' : ''} onclick={ this.handleClick }>On / Off Campus</div>
+          <div className={ this.state.active == 'list' ? 'active' : ''} onClick={ this.viewList }>List</div>
+          <div className={ this.state.active == 'pop' ? 'active' : ''} onClick={ this.viewPop }>Population</div>
+          <div className={ this.state.active == 'campus' ? 'active' : ''} onClick={ this.handleClick }>On / Off Campus</div>
         </nav>
 
         <div class="container">

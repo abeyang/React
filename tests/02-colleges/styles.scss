@@ -84,7 +84,7 @@ nav {
 	}
 }
 
-.pad, .pad td {
+.pad, .pad td, .pad th {
 	padding: 20px 0;
 }
 
@@ -103,9 +103,8 @@ table {
 }
 
 th {
-	padding: 10px;
 	text-align: left;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid $slate-05;
 }
 
 td {
