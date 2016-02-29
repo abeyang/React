@@ -19,18 +19,18 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="styles.css">
 
-<!-- Load all other resources here: -->
+<!-- React Code: -->
 <script type="text/babel">
 
-var CollegeRow = React.createClass({
+// Population: Bar Graph
+
+var PopRow = React.createClass({
   render: function() {
     var name = this.props.college.name;
     var grads = this.props.college.grads;
     var undergrads = this.props.college.undergrads.total;
     var total = grads + undergrads;
     var max = this.props.max;
-    var sat = this.props.college.sat;
-    var gpa = this.props.college.gpa;
     var uStyle = { width: undergrads / max * 100 + '%' };
     var gStyle = { width: grads / max * 100 + '%' };
 
@@ -47,17 +47,92 @@ var CollegeRow = React.createClass({
   }
 });
 
-var CollegeTable = React.createClass({
+var PopTable = React.createClass({
   render: function() {
     var c_bigpop = _.max(this.props.colleges, function(c) { return c.undergrads.total; });
     var max = c_bigpop.grads + c_bigpop.undergrads.total;
 
     var rows = [];
     this.props.colleges.forEach(function(college) {
-      rows.push(<CollegeRow college={college} key={college.name} max={max} />);
+      rows.push(<PopRow college={college} key={college.name} max={max} />);
     });
     return (
       <div>{rows}</div>
+    );
+  }
+});
+
+// List View
+
+var ListRow = React.createClass({
+  render: function() {
+    var name = this.props.college.name;
+    var grads = this.props.college.grads;
+    var undergrads = this.props.college.undergrads.total;
+    var total = grads + undergrads;
+    var sat = this.props.college.sat;
+    var gpa = this.props.college.gpa;
+
+    return (
+      <tr className="pad">
+        <td>{name}</td>
+        <td>{undergrads}</td>
+        <td>{grads}</td>
+        <td>{sat}</td>
+        <td>{gpa}</td>
+      </tr>
+    );
+  }
+});
+
+var ListTable = React.createClass({
+  render: function() {
+    var rows = [];
+    this.props.colleges.forEach(function(college) {
+      rows.push(<ListRow college={college} key={college.name} />);
+    });
+    return (
+      <table>
+        {rows}
+      </table>
+    );
+  }
+});
+
+// UI Components
+
+var UI = React.createClass({
+  getInitialState: function() {
+    return this.viewPop();
+  },
+
+  viewList: function() {
+    return {
+      active: 'list',
+      view: <ListTable colleges={COLLEGES} />
+    };
+  },
+
+  viewPop: function() {
+    return {
+      active: 'pop',
+      view: <PopTable colleges={COLLEGES} />
+    };
+  },
+
+  render: function() {
+    return (
+      <div>
+        <nav>
+          <div className={ this.state.active == 'list' ? 'active' : ''} onclick={ this.viewList }>List</div>
+          <div className={ this.state.active == 'pop' ? 'active' : ''} onclick={ this.viewPop }>Population</div>
+          <div className={ this.state.active == 'campus' ? 'active' : ''} onclick={ this.handleClick }>On / Off Campus</div>
+        </nav>
+
+        <div class="container">
+          {this.state.view}
+        </div>
+      </div>
     );
   }
 });
@@ -70,18 +145,13 @@ var COLLEGES = [
 ];
  
 ReactDOM.render(
-  <CollegeTable colleges={COLLEGES} />,
+  <UI colleges={COLLEGES} />,
   document.getElementById('container')
 );
       
 </script>
 
-<main>
-  <h1>Colleges</h1>
-
-  <div id="container">
-
-  </div>
+<main id="container">
 </main>
   
 </body>

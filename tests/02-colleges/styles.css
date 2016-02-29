@@ -7,19 +7,40 @@ html {
 html, body {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   font-size: 16px;
-  color: #333; }
+  color: #333;
+  background-color: #f5f8fa; }
 
 .text-right {
   text-align: right; }
 
-body {
+main {
+  margin-left: 300px;
   padding: 80px; }
 
-main {
+nav {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  background-color: #002d4c; }
+  nav div {
+    padding: 20px 0 20px 20px;
+    color: #f5f8fa;
+    opacity: 0.30; }
+    nav div:hover {
+      opacity: 1;
+      cursor: pointer; }
+    nav div.active {
+      border-right: 2px solid #00ebfa;
+      color: #00ebfa;
+      opacity: 1; }
+
+.container {
   max-width: 68em;
   margin-left: auto;
   margin-right: auto; }
-  main::after {
+  .container::after {
     clear: both;
     content: "";
     display: table; }
@@ -43,7 +64,7 @@ main {
     .row .bar .b-grad {
       background: blue; }
 
-.pad {
+.pad, .pad td {
   padding: 20px 0; }
 
 .name {
@@ -64,7 +85,8 @@ main {
     margin-right: 0; }
 
 table {
-  border-collapse: collapse; }
+  border-collapse: collapse;
+  width: 100%; }
 
 th {
   padding: 10px;
@@ -72,5 +94,5 @@ th {
   border-bottom: 1px solid #ccc; }
 
 td {
-  border-bottom: 1px dashed #ddd;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.05);
   padding: 10px; }

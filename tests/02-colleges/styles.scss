@@ -1,7 +1,19 @@
 @import "bourbon", "neat";
 
+// VARIABLES
+// -------------------------------------------------------------
+
 $slate: #333;
 $slate-15: rgba($slate, 0.15);
+$slate-05: rgba($slate, 0.05);
+
+$offwhite: #f5f8fa;
+$offwhite-30: rgba($offwhite, 0.30);
+
+$lightblue: #00ebfa;
+$deepblue: #002d4c;
+
+$nav-width: 300px;
 
 // TYPOGRAPHY
 // -------------------------------------------------------------
@@ -10,6 +22,7 @@ html, body {
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	color: $slate;
+	background-color: $offwhite;
 }
 
 .text-right { text-align: right; }
@@ -17,11 +30,37 @@ html, body {
 // LAYOUT
 // -------------------------------------------------------------
 
-body {
+main {
+	margin-left: $nav-width;
 	padding: 80px;
 }
 
-main {
+nav {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: $nav-width;
+	background-color: $deepblue;
+
+	div {
+		padding: 20px 0 20px 20px;
+		color: $offwhite;
+		opacity: 0.30;
+
+		&:hover {
+			opacity: 1;
+			cursor: pointer;
+		}
+		&.active {
+			border-right: 2px solid $lightblue;
+			color: $lightblue;
+			opacity: 1;
+		}
+	}
+}
+
+.container {
 	@include outer-container();
 }
 
@@ -45,7 +84,7 @@ main {
 	}
 }
 
-.pad {
+.pad, .pad td {
 	padding: 20px 0;
 }
 
@@ -60,6 +99,7 @@ main {
 
 table {
 	border-collapse:collapse;
+	width: 100%;
 }
 
 th {
@@ -69,6 +109,6 @@ th {
 }
 
 td {
-	border-bottom: 1px dashed #ddd;
+	border-bottom: 1px solid $slate-05;
 	padding: 10px;
 }
