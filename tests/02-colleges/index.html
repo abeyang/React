@@ -54,7 +54,7 @@ var PopTable = React.createClass({
 
     var rows = [];
     this.props.colleges.forEach(function(college) {
-      rows.push(<PopRow college={college} key={college.name} max={max} />);
+      if (college.show) rows.push(<PopRow college={college} key={college.name} max={max} />);
     });
     return (
       <div>{rows}</div>
@@ -90,7 +90,7 @@ var ListTable = React.createClass({
   render: function() {
     var rows = [];
     this.props.colleges.forEach(function(college) {
-      rows.push(<ListRow college={college} key={college.name} />);
+      if (college.show) rows.push(<ListRow college={college} key={college.name} />);
     });
     return (
       <table>
@@ -145,8 +145,13 @@ var UI = React.createClass({
           <div className={ this.state.active == 'campus' ? 'active' : ''} onClick={ this.handleClick }>On / Off Campus</div>
         </nav>
 
-        <div class="container">
+        <div className="container">
+          <header>
+            Filter options...
+          </header>
+
           {this.state.view}
+
         </div>
       </div>
     );
@@ -154,10 +159,10 @@ var UI = React.createClass({
 });
 
 var COLLEGES = [
-  {name: 'UC Berkeley', city: 'Berkeley', region: 'CA', type: 'semester', grads: 10125, undergrads: {total: 25774, asians: 9300, latinos: 3320}, liveoncampus: {frosh: 0.95, undergrads: 0.26}, sat: 2124, gpa: 3.9},
-  {name: 'UC Riverside', city: 'Riverside', region: 'CA', type: 'quarter', grads: 2676, undergrads: {total: 18621, asians: 6713, latinos: 6678}, liveoncampus: {frosh: 0.74, undergrads: 0.31}, sat: 1720, gpa: 3.6},
-  {name: 'UT Austin', city: 'Austin', region: 'TX', type: 'semester', grads: 10994, undergrads: {total: 39979, asians: 7196, latinos: 8679}, liveoncampus: {frosh: 0.639, undergrads: 0.19}, sat: 1859, gpa: 3.63},
-  {name: 'University of Washington',  city: 'Seattle', region: 'WA', type: 'quarter', grads: 13635, undergrads: {total: 28933, asians: 7119, latinos: 1813}, liveoncampus: {frosh: 0.65, undergrads: 0.26}, sat: 1795, gpa: 3.75}
+  {name: 'UC Berkeley', city: 'Berkeley', region: 'CA', type: 'semester', grads: 10125, undergrads: {total: 25774, asians: 9300, latinos: 3320}, liveoncampus: {frosh: 0.95, undergrads: 0.26}, sat: 2124, gpa: 3.9, show: true },
+  {name: 'UC Riverside', city: 'Riverside', region: 'CA', type: 'quarter', grads: 2676, undergrads: {total: 18621, asians: 6713, latinos: 6678}, liveoncampus: {frosh: 0.74, undergrads: 0.31}, sat: 1720, gpa: 3.6, show: true },
+  {name: 'UT Austin', city: 'Austin', region: 'TX', type: 'semester', grads: 10994, undergrads: {total: 39979, asians: 7196, latinos: 8679}, liveoncampus: {frosh: 0.639, undergrads: 0.19}, sat: 1859, gpa: 3.63, show: true },
+  {name: 'University of Washington',  city: 'Seattle', region: 'WA', type: 'quarter', grads: 13635, undergrads: {total: 28933, asians: 7119, latinos: 1813}, liveoncampus: {frosh: 0.65, undergrads: 0.26}, sat: 1795, gpa: 3.75, show: true }
 ];
  
 ReactDOM.render(
