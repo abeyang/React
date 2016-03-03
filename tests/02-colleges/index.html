@@ -117,23 +117,22 @@ var UI = React.createClass({
   getInitialState: function() {
     // TODO: seems redundant; should just go directly to viewList
     return {
-      active: 'list',
-      view: <ListTable colleges={COLLEGES} />
+      active: 'list'
+      // ,view: <ListTable colleges={COLLEGES} />
     };
   },
 
-  viewList: function(event) {
-    this.setState({
-      active: 'list',
-      view: <ListTable colleges={COLLEGES} />
-    });
+  // TODO: this currently produces an error
+  // setActive: function(event, key) {
+  //   this.setState({ active: key });
+  // },
+
+  viewList: function() {
+    this.setState({ active: 'list' });
   },
 
-  viewPop: function(event) {
-    this.setState({
-      active: 'pop',
-      view: <PopTable colleges={COLLEGES} />
-    });
+  viewPop: function() {
+    this.setState({ active: 'pop' });
   },
 
   render: function() {
@@ -150,7 +149,12 @@ var UI = React.createClass({
             Filter options...
           </header>
 
-          {this.state.view}
+          {(() => {
+            switch (this.state.active) {
+              case "pop":   return <PopTable colleges={COLLEGES} />
+              default:      return <ListTable colleges={COLLEGES} />
+            }
+          })()}
 
         </div>
       </div>
