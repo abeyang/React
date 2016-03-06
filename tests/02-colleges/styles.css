@@ -8,7 +8,7 @@ html, body {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   font-size: 16px;
   color: #333;
-  background-color: #f5f8fa; }
+  background-color: #fff; }
 
 .text-right {
   text-align: right; }
@@ -26,7 +26,7 @@ nav {
   background-color: #002d4c; }
   nav div {
     padding: 20px 0 20px 20px;
-    color: #f5f8fa;
+    color: #fff;
     opacity: 0.30; }
     nav div:hover {
       opacity: 1;

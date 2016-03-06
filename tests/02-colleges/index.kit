@@ -75,6 +75,7 @@ var ListRow = React.createClass({
 var ListTable = React.createClass({
   render: function() {
     var rows = [];
+    // console.log(this.state.colleges);
     this.props.colleges.forEach(function(college) {
       if (college.show) rows.push(<ListRow college={college} key={college.name} />);
     });
@@ -99,12 +100,48 @@ var ListTable = React.createClass({
 
 // UI Components
 
+var FilterItem = React.createClass({
+  // handleChange: function() {
+  //   this.props.onUserInput(
+  //     this.refs.showCollege.checked
+  //   );
+  // },
+
+  render: function() {
+    return (
+      <div>
+        <input type="checkbox" 
+              checked={this.props.college.show}
+              ref="showCollege"
+              // onChange={this.handleChange}
+              /> {this.props.college.name}
+      </div>
+    );
+  }
+});
+
+var FilterList = React.createClass({
+  // TODO: add onUserInput: function()
+  render: function() {
+    var rows = [];
+    this.props.colleges.forEach(function(college) {
+      // rows.push(<FilterItem college={college} onUserInput={this.handleUserInput} />);
+      rows.push(<FilterItem college={college} />);
+    });
+    
+    return (
+      <header>
+        {rows}
+      </header>
+    );
+  }
+});
+
 var UI = React.createClass({
   getInitialState: function() {
-    // TODO: seems redundant; should just go directly to viewList
     return {
-      active: 'list'
-      // ,view: <ListTable colleges={COLLEGES} />
+      active: 'list',
+      colleges: this.props.colleges
     };
   },
 
@@ -114,6 +151,7 @@ var UI = React.createClass({
   // },
 
   viewList: function() {
+    // console.log(this.state.colleges);
     this.setState({ active: 'list' });
   },
 
@@ -131,14 +169,12 @@ var UI = React.createClass({
         </nav>
 
         <div className="container">
-          <header>
-            Filter options...
-          </header>
+          <FilterList colleges={this.state.colleges} />
 
           {(() => {
             switch (this.state.active) {
-              case "pop":   return <PopTable colleges={COLLEGES} />
-              default:      return <ListTable colleges={COLLEGES} />
+              case "pop":   return <PopTable colleges={this.state.colleges} />
+              default:      return <ListTable colleges={this.state.colleges} />
             }
           })()}
 
@@ -149,7 +185,7 @@ var UI = React.createClass({
 });
 
 var COLLEGES = [
-  {name: 'UC Berkeley', city: 'Berkeley', region: 'CA', type: 'semester', grads: 10125, undergrads: {total: 25774, asians: 9300, latinos: 3320}, liveoncampus: {frosh: 0.95, undergrads: 0.26}, sat: 2124, gpa: 3.9, show: true },
+  {name: 'UC Berkeley', city: 'Berkeley', region: 'CA', type: 'semester', grads: 10125, undergrads: {total: 25774, asians: 9300, latinos: 3320}, liveoncampus: {frosh: 0.95, undergrads: 0.26}, sat: 2124, gpa: 3.9, show: false },
   {name: 'UC Riverside', city: 'Riverside', region: 'CA', type: 'quarter', grads: 2676, undergrads: {total: 18621, asians: 6713, latinos: 6678}, liveoncampus: {frosh: 0.74, undergrads: 0.31}, sat: 1720, gpa: 3.6, show: true },
   {name: 'UT Austin', city: 'Austin', region: 'TX', type: 'semester', grads: 10994, undergrads: {total: 39979, asians: 7196, latinos: 8679}, liveoncampus: {frosh: 0.639, undergrads: 0.19}, sat: 1859, gpa: 3.63, show: true },
   {name: 'University of Washington',  city: 'Seattle', region: 'WA', type: 'quarter', grads: 13635, undergrads: {total: 28933, asians: 7119, latinos: 1813}, liveoncampus: {frosh: 0.65, undergrads: 0.26}, sat: 1795, gpa: 3.75, show: true }

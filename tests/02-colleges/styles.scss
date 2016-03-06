@@ -9,6 +9,7 @@ $slate-05: rgba($slate, 0.05);
 
 $offwhite: #f5f8fa;
 $offwhite-30: rgba($offwhite, 0.30);
+$white: #fff;
 
 $lightblue: #00ebfa;
 $deepblue: #002d4c;
@@ -22,7 +23,7 @@ html, body {
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	color: $slate;
-	background-color: $offwhite;
+	background-color: $white;
 }
 
 .text-right { text-align: right; }
@@ -45,7 +46,7 @@ nav {
 
 	div {
 		padding: 20px 0 20px 20px;
-		color: $offwhite;
+		color: $white;
 		opacity: 0.30;
 
 		&:hover {
